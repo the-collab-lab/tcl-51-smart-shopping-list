@@ -5,6 +5,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
     - [Dione Developer](https://github.com/DioneDeveloper) 💅
 
 - [Alejandro Rojas](https://github.com/kmachappy) 🐈‍
+- [Aubrey Finkelstein](https://github.com/a-fink/) 🦉
 
 ## Cohort Participants
 
