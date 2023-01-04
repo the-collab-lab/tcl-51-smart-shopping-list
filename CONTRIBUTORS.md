@@ -6,6 +6,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Alejandro Rojas](https://github.com/kmachappy) 🐈‍
 - [Aubrey Finkelstein](https://github.com/a-fink/) 🦉
+- [Amanda DiNoto](https://github.com/Amanda2900) ⛄️
 
 ## Cohort Participants
 
