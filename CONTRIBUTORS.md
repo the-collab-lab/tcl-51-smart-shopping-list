@@ -4,12 +4,11 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
     - [Dione Developer](https://github.com/DioneDeveloper) 💅
 
+## Cohort Participants
 - [Alejandro Rojas](https://github.com/kmachappy) 🐈‍
 - [Aubrey Finkelstein](https://github.com/a-fink/) 🦉
 - [Amanda DiNoto](https://github.com/Amanda2900) ⛄️
-
-## Cohort Participants
-
 ## Mentors
+- [Grace de la Mora](https://github.com/thetrend) 🎉
 
 ## Code of Conduct Contacts
