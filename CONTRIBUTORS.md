@@ -10,5 +10,5 @@ Add yourself as a contributor to this project as a Markdown link that links your
 - [Amanda DiNoto](https://github.com/Amanda2900) ⛄️
 ## Mentors
 - [Grace de la Mora](https://github.com/thetrend) 🎉
-- [Devin Jaggernauth] (https://github.com/mentalcaries) 👻
+- [Devin Jaggernauth](https://github.com/mentalcaries) 👻
 ## Code of Conduct Contacts
