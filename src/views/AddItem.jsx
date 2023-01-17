@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export function AddItem({ addItem }) {
+export function AddItem({ addItem, listToken }) {
 	const [form, setForm] = useState({ itemName: '', daysUntilNextPurchase: 7 });
 
 	const handleSubmit = (event) => {
 		console.log('Click');
 		event.preventDefault();
 		setForm({ itemName: '', daysUntilNextPurchase: 7 });
-		addItem(form);
+		addItem(listToken, form);
 	};
 
 	const onChange = (event) => {
