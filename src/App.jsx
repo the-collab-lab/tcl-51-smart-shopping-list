@@ -22,6 +22,11 @@ export function App() {
 		null,
 		'tcl-shopping-list-token',
 	);
+	//here we are creating a function that will be passed to home to allow
+	//home to update state with the new token.
+	const updateListToken = (token) => {
+		setListToken(token);
+	};
 
 	useEffect(() => {
 		if (!listToken) return;
@@ -51,7 +56,12 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
+					<Route
+						index
+						element={
+							<Home listToken={listToken} updateListToken={updateListToken} />
+						}
+					/>
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>
