@@ -1,11 +1,20 @@
 import { useState } from 'react';
+import Form from '../components/form';
 
 export function AddItem({ addItem, listToken }) {
-	const [form, setForm] = useState({ itemName: '', daysUntilNextPurchase: 7 });
+	const [form, setForm] = useState({
+		itemName: '',
+		daysUntilNextPurchase: 7,
+		isSubmited: false,
+		isFailed: false,
+	});
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setForm({ itemName: '', daysUntilNextPurchase: 7 });
+		if (form.itemName.length === 0) {
+			return;
+		}
+		setForm({ itemName: '', daysUntilNextPurchase: 7, isSubmited: true });
 		addItem(listToken, form);
 	};
 
@@ -16,49 +25,5 @@ export function AddItem({ addItem, listToken }) {
 		});
 	};
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="itemName">Item Name:</label>
-			<input
-				type="text"
-				id="itemName"
-				name="itemName"
-				value={form.itemName}
-				onChange={onChange}
-			/>
-			<fieldset>
-				<div>
-					<p>How soon will you buy this again?</p>
-				</div>
-				<label htmlFor="soon">Soon</label>
-				<input
-					type="radio"
-					value={7}
-					name="daysUntilNextPurchase"
-					id="soon"
-					onChange={onChange}
-					checked={true}
-				/>
-
-				<label htmlFor="kindOfSoon">Kind of Soon</label>
-				<input
-					type="radio"
-					value={14}
-					name="daysUntilNextPurchase"
-					id="kindOfSoon"
-					onChange={onChange}
-				/>
-
-				<label htmlFor="notSoon">Not Soon</label>
-				<input
-					type="radio"
-					value={30}
-					name="daysUntilNextPurchase"
-					id="notSoon"
-					onChange={onChange}
-				/>
-			</fieldset>
-			<button type="submit">Add Item</button>
-		</form>
-	);
+	return <Form form={form} handleSubmit={handleSubmit} onChange={onChange} />;
 }
