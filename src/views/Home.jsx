@@ -1,18 +1,19 @@
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
-
-//we are giving home a list function that when called will update in
-//the app.jsx.
+import { Navigate } from 'react-router-dom';
 
 export function Home({ updateListToken, listToken }) {
+	// console.log(listToken, 'hey');
+
+	// upon button click generate new token and send it to parent component to store in state
 	const clickHandler = () => {
 		let newToken = generateToken();
 
 		updateListToken(newToken);
-		console.log(newToken);
+		// console.log(newToken);
 	};
 
-	return (
+	return listToken === null ? (
 		<div className="Home">
 			<p>
 				Welcome to your new shopping list!
@@ -20,5 +21,7 @@ export function Home({ updateListToken, listToken }) {
 			</p>
 			<button onClick={clickHandler}>Create a new list</button>
 		</div>
+	) : (
+		<Navigate to="/list" />
 	);
 }
