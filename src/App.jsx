@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 
-import { getItemData, streamListItems, addItem } from './api';
+import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
 
 export function App() {
@@ -53,10 +53,7 @@ export function App() {
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path="/list" element={<List data={data} />} />
-					<Route
-						path="/add-item"
-						element={<AddItem addItem={addItem} listToken={listToken} />}
-					/>
+					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
 				</Route>
 			</Routes>
 		</Router>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Form from '../components/form';
+import { addItem } from '../api';
 
-export function AddItem({ addItem, listToken }) {
+export function AddItem({ listToken }) {
 	const [form, setForm] = useState({
 		itemName: '',
 		daysUntilNextPurchase: 7,
