@@ -22,7 +22,7 @@ export default function Form({ handleSubmit, form, onChange }) {
 						name="daysUntilNextPurchase"
 						id="soon"
 						onChange={onChange}
-						checked={form.daysUntilNextPurchase === '7'}
+						checked={form.daysUntilNextPurchase === 7}
 					/>
 
 					<label htmlFor="kindOfSoon">Kind of Soon</label>
@@ -47,15 +47,6 @@ export default function Form({ handleSubmit, form, onChange }) {
 			</form>
 
 			{form.isSubmited && <div>item added succesfuly</div>}
-
-			{/* isSubmitted */}
-			{/*  */}
-
-			{/* div  not initialy visible */}
-			{/* check if div should be shown */}
-			{/* check what message to be showing */}
-			{/* ternary function here */}
-			{/* if something ? show message :  */}
 		</>
 	);
 }

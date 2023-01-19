@@ -3,26 +3,32 @@ import Form from '../components/form';
 import { addItem } from '../api';
 
 export function AddItem({ listToken }) {
-	const [form, setForm] = useState({
+	const defaultFormValues = {
 		itemName: '',
-		daysUntilNextPurchase: '7',
+		daysUntilNextPurchase: 7,
 		isSubmited: false,
-		isFailed: false,
-	});
+	};
+
+	const [form, setForm] = useState(defaultFormValues);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (form.itemName.length === 0) {
 			return;
 		}
-		setForm({ itemName: '', daysUntilNextPurchase: '7', isSubmited: true });
+		setForm({ ...defaultFormValues, isSubmited: true });
 		addItem(listToken, form);
 	};
 
 	const onChange = (event) => {
+		const newValue =
+			event.target.name === 'daysUntilNextPurchase'
+				? Number(event.target.value)
+				: event.target.value;
+
 		setForm({
 			...form,
-			[event.target.name]: event.target.value,
+			[event.target.name]: newValue,
 		});
 	};
 
