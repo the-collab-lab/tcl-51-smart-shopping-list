@@ -5,7 +5,7 @@ import { addItem } from '../api';
 export function AddItem({ listToken }) {
 	const [form, setForm] = useState({
 		itemName: '',
-		daysUntilNextPurchase: 7,
+		daysUntilNextPurchase: '7',
 		isSubmited: false,
 		isFailed: false,
 	});
@@ -15,7 +15,7 @@ export function AddItem({ listToken }) {
 		if (form.itemName.length === 0) {
 			return;
 		}
-		setForm({ itemName: '', daysUntilNextPurchase: 7, isSubmited: true });
+		setForm({ itemName: '', daysUntilNextPurchase: '7', isSubmited: true });
 		addItem(listToken, form);
 	};
 

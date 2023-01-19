@@ -22,7 +22,7 @@ export default function Form({ handleSubmit, form, onChange }) {
 						name="daysUntilNextPurchase"
 						id="soon"
 						onChange={onChange}
-						defaultChecked={true}
+						checked={form.daysUntilNextPurchase === '7'}
 					/>
 
 					<label htmlFor="kindOfSoon">Kind of Soon</label>
