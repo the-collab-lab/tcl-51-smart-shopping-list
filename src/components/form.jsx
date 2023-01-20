@@ -1,5 +1,3 @@
-import { json } from 'react-router-dom';
-
 export default function Form({ handleSubmit, form, onChange }) {
 	return (
 		<>
@@ -53,8 +51,8 @@ export default function Form({ handleSubmit, form, onChange }) {
 					{form.isLoading ? 'Loading...' : ''}
 					{
 						form.isSuccess ? 'Item added Successfully' : form.error
-						// 'Error adding item'
 					}
+					'Error adding item'
 				</div>
 			)}
 		</>
