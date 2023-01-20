@@ -65,7 +65,7 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 		});
 		return { success: true };
 	} catch (error) {
-		return { success: false, error: error };
+		return { success: false, error: JSON.stringify(error.message) };
 	}
 }
 

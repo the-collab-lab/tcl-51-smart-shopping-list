@@ -33,6 +33,7 @@ export function AddItem({ listToken }) {
 					isSubmitted: true,
 					isSuccess: false,
 					isLoading: false,
+					error,
 			  });
 	};
 
@@ -51,7 +52,7 @@ export function AddItem({ listToken }) {
 		if (form.isSubmitted) {
 			setTimeout(() => {
 				setForm({ ...form, isSubmitted: false });
-			}, 2000);
+			}, 4000);
 		}
 	}, [form]);
 
