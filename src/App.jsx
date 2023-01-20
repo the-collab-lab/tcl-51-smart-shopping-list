@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	Navigate,
+	BrowserRouter as Router,
+	Routes,
+	Route,
+} from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 
@@ -22,11 +27,6 @@ export function App() {
 		null,
 		'tcl-shopping-list-token',
 	);
-	//here we are creating a function that will be passed to home to allow
-	//home to update state with the new token.
-	const updateListToken = (token) => {
-		setListToken(token);
-	};
 
 	useEffect(() => {
 		if (!listToken) return;
@@ -56,12 +56,11 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route
-						index
-						element={
-							<Home listToken={listToken} updateListToken={updateListToken} />
-						}
-					/>
+					{listToken ? (
+						<Route index element={<Navigate to="/list" />} />
+					) : (
+						<Route index element={<Home setListToken={setListToken} />} />
+					)}
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
 				</Route>

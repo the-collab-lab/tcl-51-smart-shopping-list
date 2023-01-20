@@ -1,27 +1,24 @@
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
-import { Navigate } from 'react-router-dom';
+import { addItem } from '../api';
 
-export function Home({ updateListToken, listToken }) {
-	// console.log(listToken, 'hey');
-
+export function Home({ setListToken }) {
 	// upon button click generate new token and send it to parent component to store in state
+	// also send a hidden placeholder item to firestore to create the collection for this list token (will be filtered out so just setting next purchase to default value of 7)
 	const clickHandler = () => {
 		let newToken = generateToken();
-
-		updateListToken(newToken);
-		// console.log(newToken);
+		setListToken(newToken);
+		addItem(newToken, {
+			itemName: 'placeholder',
+			daysUntilNextPurchase: 7,
+			hidden: true,
+		});
 	};
 
-	return listToken === null ? (
+	return (
 		<div className="Home">
-			<p>
-				Welcome to your new shopping list!
-				{/* Hello from the home (<code>/</code>) page! */}
-			</p>
+			<p>Welcome to your new shopping list!</p>
 			<button onClick={clickHandler}>Create a new list</button>
 		</div>
-	) : (
-		<Navigate to="/list" />
 	);
 }
