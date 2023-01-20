@@ -8,6 +8,7 @@ export function AddItem({ listToken }) {
 		itemName: '',
 		daysUntilNextPurchase: 7,
 		isSubmitted: false,
+		isLoading: false,
 		isSuccess: false,
 	};
 
@@ -18,11 +19,21 @@ export function AddItem({ listToken }) {
 		if (form.itemName.length === 0) {
 			return;
 		}
+		setForm({ ...defaultFormValues, isSubmitted: true, isLoading: true });
 		const { success, error } = await addItem(listToken, form);
-		console.log('success', success, 'error', error);
 		success
-			? setForm({ ...defaultFormValues, isSubmitted: true, isSuccess: true })
-			: setForm({ ...defaultFormValues, isSubmitted: true, isSuccess: false });
+			? setForm({
+					...defaultFormValues,
+					isSubmitted: true,
+					isSuccess: true,
+					isLoading: false,
+			  })
+			: setForm({
+					...defaultFormValues,
+					isSubmitted: true,
+					isSuccess: false,
+					isLoading: false,
+			  });
 	};
 
 	const onChange = (event) => {
