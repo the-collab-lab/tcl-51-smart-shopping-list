@@ -1,3 +1,5 @@
+import { json } from 'react-router-dom';
+
 export default function Form({ handleSubmit, form, onChange }) {
 	return (
 		<>
@@ -46,7 +48,11 @@ export default function Form({ handleSubmit, form, onChange }) {
 				<button type="submit">Add Item</button>
 			</form>
 
-			{form.isSubmited && <div>item added succesfuly</div>}
+			{form.isSubmitted && (
+				<div>
+					{form.isSuccess ? 'Item added Successfully' : 'Failed to add item'}
+				</div>
+			)}
 		</>
 	);
 }
