@@ -46,7 +46,12 @@ export default function Form({ handleSubmit, form, onChange }) {
 				<button type="submit">Add Item</button>
 			</form>
 
-			{form.isSubmited && <div>item added succesfuly</div>}
+			{form.isSubmitted && (
+				<div>
+					{form.isLoading ? 'Loading...' : ''}
+					{form.isSuccess ? 'Item added Successfully' : form.error}
+				</div>
+			)}
 		</>
 	);
 }

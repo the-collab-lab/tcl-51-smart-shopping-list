@@ -69,16 +69,21 @@ export async function addItem(
 
 	// TODO: Replace this call to console.log with the appropriate
 	// Firebase function, so this information is sent to your database!
-	return setDoc(doc(listCollectionRef), {
-		dateCreated: new Date(),
-		// NOTE: This is null because the item has just been created.
-		// We'll use updateItem to put a Date here when the item is purchased!
-		dateLastPurchased: null,
-		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-		name: itemName,
-		totalPurchases: 0,
-		hidden: isHidden,
-	});
+	try {
+		await setDoc(doc(listCollectionRef), {
+			dateCreated: new Date(),
+			// NOTE: This is null because the item has just been created.
+			// We'll use updateItem to put a Date here when the item is purchased!
+			dateLastPurchased: null,
+			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
+			name: itemName,
+			totalPurchases: 0,
+      hidden: isHidden
+		});
+		return { success: true };
+	} catch (error) {
+		return { success: false, error: JSON.stringify(error.message) };
+	}
 }
 
 export async function updateItem() {
