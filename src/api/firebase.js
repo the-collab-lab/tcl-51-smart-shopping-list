@@ -27,7 +27,7 @@ export function getItemData(snapshot) {
 	 * document references. We use `.map()` to iterate over them.
 	 * @see https://firebase.google.com/docs/reference/js/firestore_.documentsnapshot
 	 */
-	return snapshot.docs.map((docRef) => {
+	const arrayFromFirestore = snapshot.docs.map((docRef) => {
 		/**
 		 * We call the `.data()` method to get the data
 		 * out of the referenced document
@@ -42,6 +42,13 @@ export function getItemData(snapshot) {
 
 		return data;
 	});
+
+	// filter the data from firebase to remove the hidden placeholder value
+	const filteredArray = arrayFromFirestore.filter(
+		(doc) => doc.hidden === false,
+	);
+
+	return filteredArray;
 }
 
 /**
@@ -51,8 +58,17 @@ export function getItemData(snapshot) {
  * @param {string} itemData.itemName The name of the item.
  * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
-export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
+export async function addItem(
+	listId,
+	{ itemName, daysUntilNextPurchase, hidden },
+) {
 	const listCollectionRef = collection(db, listId);
+
+	// if hidden property exists (placeholder item) set isHidden to true, otherwise false (all other items)
+	const isHidden = hidden !== undefined ? true : false;
+
+	// TODO: Replace this call to console.log with the appropriate
+	// Firebase function, so this information is sent to your database!
 	try {
 		await setDoc(doc(listCollectionRef), {
 			dateCreated: new Date(),
@@ -62,6 +78,7 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name: itemName,
 			totalPurchases: 0,
+      hidden: isHidden
 		});
 		return { success: true };
 	} catch (error) {
