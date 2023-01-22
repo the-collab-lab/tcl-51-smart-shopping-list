@@ -49,10 +49,7 @@ export default function Form({ handleSubmit, form, onChange }) {
 			{form.isSubmitted && (
 				<div>
 					{form.isLoading ? 'Loading...' : ''}
-					{
-						form.isSuccess ? 'Item added Successfully' : form.error
-					}
-					'Error adding item'
+					{form.isSuccess ? 'Item added Successfully' : form.error}
 				</div>
 			)}
 		</>
