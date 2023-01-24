@@ -31,7 +31,10 @@ export function List({ data }) {
 				{data.length > 0 ? (
 					<ul>
 						{data
-							.filter((item) => item.name.includes(filter) || filter === '')
+							.filter(
+								(item) =>
+									item.name.includes(filter.toLowerCase()) || filter === '',
+							)
 							.map((item) => {
 								return <ListItem name={item.name} key={item.id} />;
 							})}
