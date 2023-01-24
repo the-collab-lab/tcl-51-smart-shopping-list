@@ -3,11 +3,21 @@ import {
 	onSnapshot,
 	doc,
 	setDoc,
-	query,
-	limit,
+	getCountFromServer,
 } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
+
+/**
+ * Return whether a collection has documents in it (list token exists) or is empty (list token does not exist)
+ * @param {string} listId the listId that a user submitted to join a list
+ * @returns {boolean}
+ */
+export async function doesCollectionExist(listId) {
+	const listCollectionRef = collection(db, listId);
+	const testSnapshot = await getCountFromServer(listCollectionRef);
+	return testSnapshot.data().count !== 0;
+}
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
@@ -20,13 +30,6 @@ import { getFutureDate } from '../utils';
 export function streamListItems(listId, handleSuccess) {
 	// TODO: check if the token is a valid token in firebase
 	const listCollectionRef = collection(db, listId);
-	// const q = query(listCollectionRef, limit(1));
-	// console.log(q, 'q');
-	// console.log(q.empty, 'q');
-	// if(!q.empty) {
-	// 	console.log('no query', q.empty)
-	// }
-	// console.log(query(listCollectionRef, limit(1)),'listCollectionRef')
 	return onSnapshot(listCollectionRef, handleSuccess);
 }
 

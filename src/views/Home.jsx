@@ -1,6 +1,6 @@
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
-import { addItem } from '../api';
+import { addItem, doesCollectionExist } from '../api';
 import { useState } from 'react';
 
 export function Home({ setListToken }) {
@@ -22,9 +22,15 @@ export function Home({ setListToken }) {
 		setTokenInput(e.target.value);
 	};
 
-	const handleTokenSubmit = (e) => {
+	const handleTokenSubmit = async (e) => {
 		e.preventDefault();
-		setListToken(tokenInput);
+		const exists = await doesCollectionExist(tokenInput);
+		console.log(exists);
+		if (exists) setListToken(tokenInput);
+		else {
+			setTokenInput('');
+			alert('Unfortunately that list does not exist');
+		}
 	};
 
 	return (
