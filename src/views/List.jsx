@@ -29,22 +29,21 @@ export function List({ data }) {
 					</span>
 				)}
 			</form>
-			<ul>
-				{data.length > 0 ? (
-					<li>
-						{data
-							.filter(
-								(item) =>
-									item.name.includes(filter.toLowerCase()) || filter === '',
-							)
-							.map((item) => {
-								return <ListItem name={item.name} key={item.id} />;
-							})}
-					</li>
-				) : (
-					<p>There are currently no items in the list.</p>
-				)}
-			</ul>
+			{data.length > 0 ? (
+				<ul>
+					{data
+						.filter(
+							(item) =>
+								item.name.toLowerCase().includes(filter.toLowerCase()) ||
+								filter === '',
+						)
+						.map((item) => {
+							return <ListItem name={item.name} key={item.id} />;
+						})}
+				</ul>
+			) : (
+				<p>There are currently no items in the list.</p>
+			)}
 		</>
 	);
 }
