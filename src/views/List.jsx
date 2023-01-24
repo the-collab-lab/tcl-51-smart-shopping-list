@@ -23,13 +23,15 @@ export function List({ data }) {
 				/>
 				{filter && (
 					<span>
-						<button onClick={clickHandler}>X</button>
+						<button type="reset" onClick={clickHandler}>
+							X
+						</button>
 					</span>
 				)}
 			</form>
 			<ul>
 				{data.length > 0 ? (
-					<ul>
+					<li>
 						{data
 							.filter(
 								(item) =>
@@ -38,7 +40,7 @@ export function List({ data }) {
 							.map((item) => {
 								return <ListItem name={item.name} key={item.id} />;
 							})}
-					</ul>
+					</li>
 				) : (
 					<p>There are currently no items in the list.</p>
 				)}
