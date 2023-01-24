@@ -1,11 +1,10 @@
 import { ListItem } from '../components';
 
-export function List({ data }) {
+export function List({ data, listToken }) {
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
+			<h2>Smart Shopping List</h2>
+			<p>Want to share your list? Your list token is: {listToken}</p>
 			<ul>
 				{data.length > 0 ? (
 					<ul>
