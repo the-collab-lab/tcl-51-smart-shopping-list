@@ -4,7 +4,9 @@ export function List({ data, listToken }) {
 	return (
 		<>
 			<h2>Smart Shopping List</h2>
-			<p>Want to share your list? Your list token is: {listToken}</p>
+			{listToken && (
+				<p>Want to share your list? Your list token is: {listToken}</p>
+			)}
 			<ul>
 				{data.length > 0 ? (
 					<ul>
