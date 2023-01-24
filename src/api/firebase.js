@@ -76,9 +76,9 @@ export async function addItem(
 			// We'll use updateItem to put a Date here when the item is purchased!
 			dateLastPurchased: null,
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-			name: itemName,
+			name: itemName.toLowerCase(),
 			totalPurchases: 0,
-      hidden: isHidden
+			hidden: isHidden,
 		});
 		return { success: true };
 	} catch (error) {

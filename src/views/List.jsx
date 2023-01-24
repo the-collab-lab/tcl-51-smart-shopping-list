@@ -18,9 +18,11 @@ export function List({ data }) {
 			<ul>
 				{data.length > 0 ? (
 					<ul>
-						{data.map((item) => {
-							return <ListItem name={item.name} key={item.id} />;
-						})}
+						{data
+							.filter((item) => item.name.includes(filter) || filter === '')
+							.map((item) => {
+								return <ListItem name={item.name} key={item.id} />;
+							})}
 					</ul>
 				) : (
 					<p>There are currently no items in the list.</p>
