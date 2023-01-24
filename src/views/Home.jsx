@@ -1,8 +1,11 @@
 import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { addItem } from '../api';
+import { useState } from 'react';
 
 export function Home({ setListToken }) {
+	const [tokenInput, setTokenInput] = useState('');
+
 	// upon button click generate new token and send it to parent component to store in state
 	// also send a hidden placeholder item to firestore to create the collection for this list token (will be filtered out so just setting next purchase to default value of 7)
 	const clickHandler = () => {
@@ -15,10 +18,42 @@ export function Home({ setListToken }) {
 		});
 	};
 
+	const tokenHandler = (e) => {
+		setTokenInput(e.target.value);
+	};
+
+	const handleTokenSubmit = (e) => {
+		e.preventDefault();
+		setListToken(tokenInput);
+	};
+
 	return (
 		<div className="Home">
-			<p>Welcome to your new shopping list!</p>
-			<button onClick={clickHandler}>Create a new list</button>
+			<div>
+				<p>Welcome to your new shopping list!</p>
+				<button onClick={clickHandler}>Create a new list</button>
+			</div>
+
+			<div>
+				<p>- or -</p>
+			</div>
+
+			<div>
+				<p>Join an existing shoping list by entering a three word token</p>
+				<form onSubmit={handleTokenSubmit}>
+					<label htmlFor="shareToken">Share Token</label>
+					<input
+						required
+						aria-required="true"
+						type="text"
+						id="shareToken"
+						placeholder="Enter Token"
+						value={tokenInput}
+						onChange={tokenHandler}
+					/>
+					<button>Join an existing list</button>
+				</form>
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,11 @@
-import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	doc,
+	setDoc,
+	query,
+	limit,
+} from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
 
@@ -11,7 +18,15 @@ import { getFutureDate } from '../utils';
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 export function streamListItems(listId, handleSuccess) {
+	// TODO: check if the token is a valid token in firebase
 	const listCollectionRef = collection(db, listId);
+	// const q = query(listCollectionRef, limit(1));
+	// console.log(q, 'q');
+	// console.log(q.empty, 'q');
+	// if(!q.empty) {
+	// 	console.log('no query', q.empty)
+	// }
+	// console.log(query(listCollectionRef, limit(1)),'listCollectionRef')
 	return onSnapshot(listCollectionRef, handleSuccess);
 }
 
@@ -42,10 +57,10 @@ export function getItemData(snapshot) {
 
 		return data;
 	});
-
+	// console.log(arrayFromFirestore,'arrayFromFirestore')
 	// filter the data from firebase to remove the hidden placeholder value
 	const filteredArray = arrayFromFirestore.filter(
-		(doc) => doc.hidden === false,
+		(doc) => doc.hidden === false || doc.hidden === undefined,
 	);
 
 	return filteredArray;
@@ -78,7 +93,7 @@ export async function addItem(
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name: itemName,
 			totalPurchases: 0,
-      hidden: isHidden
+			hidden: isHidden,
 		});
 		return { success: true };
 	} catch (error) {
