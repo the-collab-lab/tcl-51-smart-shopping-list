@@ -25,7 +25,6 @@ export function Home({ setListToken }) {
 	const handleTokenSubmit = async (e) => {
 		e.preventDefault();
 		const exists = await doesCollectionExist(tokenInput);
-		console.log(exists);
 		if (exists) setListToken(tokenInput);
 		else {
 			setTokenInput('');

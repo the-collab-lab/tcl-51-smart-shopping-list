@@ -28,7 +28,6 @@ export async function doesCollectionExist(listId) {
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 export function streamListItems(listId, handleSuccess) {
-	// TODO: check if the token is a valid token in firebase
 	const listCollectionRef = collection(db, listId);
 	return onSnapshot(listCollectionRef, handleSuccess);
 }
@@ -60,7 +59,7 @@ export function getItemData(snapshot) {
 
 		return data;
 	});
-	// console.log(arrayFromFirestore,'arrayFromFirestore')
+
 	// filter the data from firebase to remove the hidden placeholder value
 	const filteredArray = arrayFromFirestore.filter(
 		(doc) => doc.hidden === false || doc.hidden === undefined,
