@@ -49,9 +49,12 @@ export function AddItem({ listToken }) {
 
 	useEffect(() => {
 		if (form.isSubmitted) {
-			setTimeout(() => {
+			const timeoutId = setTimeout(() => {
 				setForm({ ...form, isSubmitted: false });
 			}, 4000);
+			return () => {
+				clearTimeout(timeoutId);
+			};
 		}
 	}, [form]);
 
