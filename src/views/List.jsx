@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { ListItem } from '../components';
 
 export function List({ data }) {
-	const [filter, setFilter] = useState('');
+	const [listFilter, setListFilter] = useState('');
 
 	const clickHandler = (event) => {
 		event.preventDefault();
-		setFilter('');
+		setListFilter('');
 	};
 
 	return (
@@ -18,10 +18,10 @@ export function List({ data }) {
 					id="itemInput"
 					name="itemInput"
 					placeholder="Start typing here..."
-					value={filter}
-					onChange={(event) => setFilter(event.target.value)}
+					value={listFilter}
+					onChange={(event) => setListFilter(event.target.value)}
 				/>
-				{filter && (
+				{listFilter && (
 					<span>
 						<button type="reset" onClick={clickHandler}>
 							X
@@ -34,8 +34,8 @@ export function List({ data }) {
 					{data
 						.filter(
 							(item) =>
-								item.name.toLowerCase().includes(filter.toLowerCase()) ||
-								filter === '',
+								item.name.toLowerCase().includes(listFilter.toLowerCase()) ||
+								listFilter === '',
 						)
 						.map((item) => {
 							return <ListItem name={item.name} key={item.id} />;
