@@ -9,9 +9,13 @@ export function List({ data }) {
 		setListFilter('');
 	};
 
+	const submitHandler = (event) => {
+		event.preventDefault();
+	};
+
 	return (
 		<>
-			<form>
+			<form onSubmit={submitHandler}>
 				<label htmlFor="itemInput">Filter Items: </label>
 				<input
 					type="text"
@@ -32,10 +36,8 @@ export function List({ data }) {
 			{data.length > 0 ? (
 				<ul>
 					{data
-						.filter(
-							(item) =>
-								item.name.toLowerCase().includes(listFilter.toLowerCase()) ||
-								listFilter === '',
+						.filter((item) =>
+							item.name.toLowerCase().includes(listFilter.toLowerCase()),
 						)
 						.map((item) => {
 							return <ListItem name={item.name} key={item.id} />;
