@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Form from '../components/form';
 import { addItem } from '../api';
-import { isCompositeComponent } from 'react-dom/test-utils';
 
 export function AddItem({ listToken }) {
 	const defaultFormValues = {

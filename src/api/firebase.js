@@ -78,7 +78,7 @@ export async function addItem(
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name: itemName,
 			totalPurchases: 0,
-      hidden: isHidden
+			hidden: isHidden,
 		});
 		return { success: true };
 	} catch (error) {
