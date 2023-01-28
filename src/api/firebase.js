@@ -1,6 +1,23 @@
-import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	doc,
+	setDoc,
+	getCountFromServer,
+} from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
+
+/**
+ * Return whether a collection has documents in it (list token exists) or is empty (list token does not exist)
+ * @param {string} listId the listId that a user submitted to join a list
+ * @returns {boolean}
+ */
+export async function doesCollectionExist(listId) {
+	const listCollectionRef = collection(db, listId);
+	const testSnapshot = await getCountFromServer(listCollectionRef);
+	return testSnapshot.data().count !== 0;
+}
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
@@ -45,7 +62,7 @@ export function getItemData(snapshot) {
 
 	// filter the data from firebase to remove the hidden placeholder value
 	const filteredArray = arrayFromFirestore.filter(
-		(doc) => doc.hidden === false,
+		(doc) => doc.hidden === false || doc.hidden === undefined,
 	);
 
 	return filteredArray;

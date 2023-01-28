@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { ListItem } from '../components';
 
-export function List({ data }) {
+
+export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
 
 	const clickHandler = (event) => {
@@ -15,6 +16,10 @@ export function List({ data }) {
 
 	return (
 		<>
+      <h2>Smart Shopping List</h2>
+			{listToken && (
+				<p>Want to share your list? Your list token is: {listToken}</p>
+			)}
 			<form onSubmit={submitHandler}>
 				<label htmlFor="itemInput">Filter Items: </label>
 				<input
