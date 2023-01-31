@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ListItem } from '../components';
 
-
 export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
 
@@ -16,7 +15,7 @@ export function List({ data, listToken }) {
 
 	return (
 		<>
-      <h2>Smart Shopping List</h2>
+			<h2>Smart Shopping List</h2>
 			{listToken && (
 				<p>Want to share your list? Your list token is: {listToken}</p>
 			)}
@@ -45,7 +44,7 @@ export function List({ data, listToken }) {
 							item.name.toLowerCase().includes(listFilter.toLowerCase()),
 						)
 						.map((item) => {
-							return <ListItem name={item.name} key={item.id} />;
+							return <ListItem itemData={item} key={item.id} />;
 						})}
 				</ul>
 			) : (
