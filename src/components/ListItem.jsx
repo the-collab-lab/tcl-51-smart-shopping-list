@@ -1,9 +1,10 @@
 import { updateItem } from '../api';
 import './ListItem.css';
 
-export function ListItem({ itemData }) {
+export function ListItem({ itemData, listToken }) {
 	const onChangeHandler = (event) => {
-		updateItem(event.target.id, event.target.value);
+		// send listToken (collection), id (document), and value (totalPurchases) to database api
+		updateItem(listToken, event.target.id, Number(event.target.value));
 	};
 
 	return (

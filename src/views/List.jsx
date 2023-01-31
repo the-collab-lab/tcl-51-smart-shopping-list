@@ -44,7 +44,9 @@ export function List({ data, listToken }) {
 							item.name.toLowerCase().includes(listFilter.toLowerCase()),
 						)
 						.map((item) => {
-							return <ListItem itemData={item} key={item.id} />;
+							return (
+								<ListItem itemData={item} listToken={listToken} key={item.id} />
+							);
 						})}
 				</ul>
 			) : (

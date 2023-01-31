@@ -4,6 +4,7 @@ import {
 	doc,
 	setDoc,
 	getCountFromServer,
+	updateDoc,
 } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -103,12 +104,19 @@ export async function addItem(
 	}
 }
 
-export async function updateItem() {
+export async function updateItem(listToken, itemId, totalPurchases) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
+	// get reference to the item's document in Firestore
+	const itemDocRef = doc(db, listToken, itemId);
+	// set dateLastPurchased to current date, incrememt totalPurchases
+	await updateDoc(itemDocRef, {
+		dateLastPurchased: new Date(),
+		totalPurchases: totalPurchases + 1,
+	});
 }
 
 export async function deleteItem() {
