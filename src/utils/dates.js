@@ -17,7 +17,7 @@ export function getFutureDate(offset) {
  * transform TimeStamp and current date to milliseconds and check whether less than one day in milliseconds
  */
 export function withinTwentyFourHours(dateLastPurchased) {
-	if (dateLastPurchased === null) return;
+	if (dateLastPurchased === null) return false;
 
 	const prevDate = dateLastPurchased.toDate().getTime();
 	const today = new Date().getTime();
