@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ListItem } from '../components';
+import { Link } from 'react-router-dom';
 
 export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
@@ -19,24 +20,26 @@ export function List({ data, listToken }) {
 			{listToken && (
 				<p>Want to share your list? Your list token is: {listToken}</p>
 			)}
-			<form onSubmit={submitHandler}>
-				<label htmlFor="itemInput">Filter Items: </label>
-				<input
-					type="text"
-					id="itemInput"
-					name="itemInput"
-					placeholder="Start typing here..."
-					value={listFilter}
-					onChange={(event) => setListFilter(event.target.value)}
-				/>
-				{listFilter && (
-					<span>
-						<button type="reset" onClick={clickHandler}>
-							X
-						</button>
-					</span>
-				)}
-			</form>
+			{data.length > 0 ? (
+				<form onSubmit={submitHandler}>
+					<label htmlFor="itemInput">Filter Items: </label>
+					<input
+						type="text"
+						id="itemInput"
+						name="itemInput"
+						placeholder="Start typing here..."
+						value={listFilter}
+						onChange={(event) => setListFilter(event.target.value)}
+					/>
+					{listFilter && (
+						<span>
+							<button type="reset" onClick={clickHandler}>
+								X
+							</button>
+						</span>
+					)}
+				</form>
+			) : null}
 			{data.length > 0 ? (
 				<ul>
 					{data
@@ -50,7 +53,12 @@ export function List({ data, listToken }) {
 						})}
 				</ul>
 			) : (
-				<p>There are currently no items in the list.</p>
+				<div>
+					<p>There are currently no items in the list.</p>
+					<Link to={'/add-item'}>
+						<button>Add item</button>
+					</Link>
+				</div>
 			)}
 		</>
 	);
