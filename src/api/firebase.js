@@ -7,7 +7,7 @@ import {
 	updateDoc,
 } from 'firebase/firestore';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
 
 /**
  * Return whether a collection has documents in it (list token exists) or is empty (list token does not exist)

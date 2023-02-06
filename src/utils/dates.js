@@ -23,3 +23,13 @@ export function withinTwentyFourHours(dateLastPurchased) {
 	const today = new Date().getTime();
 	return today - prevDate < ONE_DAY_IN_MILLISECONDS;
 }
+
+export function getDaysBetweenDates(newerPurchase, olderPurchase) {
+	const newerPurchaseMilliseconds = newerPurchase.toDate().getTime();
+	const olderPurchaseMilliseconds = olderPurchase.toDate().getTime();
+
+	const timeBetween = newerPurchaseMilliseconds - olderPurchaseMilliseconds;
+	const daysBetween = Math.floor(timeBetween / ONE_DAY_IN_MILLISECONDS);
+
+	return daysBetween;
+}
