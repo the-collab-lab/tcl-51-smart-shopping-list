@@ -104,18 +104,18 @@ export async function addItem(
 	}
 }
 
-export async function updateItem(listToken, itemId, totalPurchases) {
+export async function updateItem(listToken, itemData) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
 	// get reference to the item's document in Firestore
-	const itemDocRef = doc(db, listToken, itemId);
+	const itemDocRef = doc(db, listToken, itemData.id);
 	// set dateLastPurchased to current date, incrememt totalPurchases
 	await updateDoc(itemDocRef, {
 		dateLastPurchased: new Date(),
-		totalPurchases: totalPurchases + 1,
+		totalPurchases: itemData.totalPurchases + 1,
 	});
 }
 
