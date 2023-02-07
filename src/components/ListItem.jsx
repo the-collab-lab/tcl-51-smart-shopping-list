@@ -4,10 +4,9 @@ import './ListItem.css';
 
 export function ListItem({ itemData, listToken }) {
 	const onChangeHandler = () => {
-		// send listToken (collection), id (document), and value (totalPurchases) to database api
+		// send listToken (collection) and all current item data to database api
 		if (!withinTwentyFourHours(itemData.dateLastPurchased)) {
 			updateItem(listToken, itemData);
-			// updateItem(listToken, event.target.id, Number(event.target.value));
 		}
 	};
 
