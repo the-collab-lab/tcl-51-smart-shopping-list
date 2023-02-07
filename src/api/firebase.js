@@ -5,6 +5,7 @@ import {
 	setDoc,
 	getCountFromServer,
 	updateDoc,
+	getDoc,
 } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -19,6 +20,7 @@ export async function doesCollectionExist(listId) {
 	const testSnapshot = await getCountFromServer(listCollectionRef);
 	return testSnapshot.data().count !== 0;
 }
+export async function doesDataExist(listId, itemName) {}
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Form from '../components/form';
-import { addItem } from '../api';
+import { addItem, doesDataExist } from '../api';
 
 export function AddItem({ listToken, data }) {
 	const defaultFormValues = {
@@ -11,18 +11,17 @@ export function AddItem({ listToken, data }) {
 		isSuccess: false,
 	};
 
+	const itemNames = new Set(data.map((item) => item.name.replace(/\s+/g, '')));
+
 	const [form, setForm] = useState(defaultFormValues);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (
-			form.itemName.length === 0 ||
-			data
-				.toLowerCase()
-				.includes(form.itemName.toLowerCase().replace(/\s+/g, ''))
-		) {
-			return;
+		doesDataExist(listToken, form.itemName);
+		if (itemNames.has(form.itemName.toLowerCase().replace(/\s+/g, ''))) {
+			alert('Item already exists.');
 		}
+
 		setForm({ ...defaultFormValues, isSubmitted: true, isLoading: true });
 		const { success, error } = await addItem(listToken, form);
 		success
