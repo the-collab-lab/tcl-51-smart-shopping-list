@@ -11,7 +11,9 @@ export function AddItem({ listToken, data }) {
 		isSuccess: false,
 	};
 
-	const itemNames = new Set(data.map((item) => item.name.replace(/\s+/g, '')));
+	const itemNames = new Set(
+		data.map((item) => item.name.toLowerCase().replace(/\s+/g, '')),
+	);
 
 	const [form, setForm] = useState(defaultFormValues);
 
@@ -20,6 +22,7 @@ export function AddItem({ listToken, data }) {
 
 		if (itemNames.has(form.itemName.toLowerCase().replace(/\s+/g, ''))) {
 			alert('Item already exists.');
+			return;
 		}
 
 		setForm({ ...defaultFormValues, isSubmitted: true, isLoading: true });
