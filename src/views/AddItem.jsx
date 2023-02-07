@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Form from '../components/form';
 import { addItem } from '../api';
 
-export function AddItem({ listToken }) {
+export function AddItem({ listToken, data }) {
 	const defaultFormValues = {
 		itemName: '',
 		daysUntilNextPurchase: 7,
@@ -15,7 +15,12 @@ export function AddItem({ listToken }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (form.itemName.length === 0) {
+		if (
+			form.itemName.length === 0 ||
+			data
+				.toLowerCase()
+				.includes(form.itemName.toLowerCase().replace(/\s+/g, ''))
+		) {
 			return;
 		}
 		setForm({ ...defaultFormValues, isSubmitted: true, isLoading: true });
