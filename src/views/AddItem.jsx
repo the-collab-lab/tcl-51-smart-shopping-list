@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Form from '../components/form';
-import { addItem, doesDataExist } from '../api';
+import { addItem } from '../api';
 
 export function AddItem({ listToken, data }) {
 	const defaultFormValues = {
@@ -17,7 +17,7 @@ export function AddItem({ listToken, data }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		doesDataExist(listToken, form.itemName);
+
 		if (itemNames.has(form.itemName.toLowerCase().replace(/\s+/g, ''))) {
 			alert('Item already exists.');
 		}
