@@ -20,6 +20,11 @@ export function AddItem({ listToken, data }) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		if (form.itemName.toLowerCase().replace(/\s+/g, '') === '') {
+			alert('Please add an item.');
+			return;
+		}
+
 		if (itemNames.has(form.itemName.toLowerCase().replace(/\s+/g, ''))) {
 			alert('Item already exists.');
 			return;
