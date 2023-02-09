@@ -132,13 +132,13 @@ export async function updateItem(
 		dateLastPurchased === null
 			? getDaysBetweenDates(today, dateCreated.toDate())
 			: getDaysBetweenDates(today, dateLastPurchased.toDate());
-	const newTotalPurcahses = totalPurchases + 1;
+	const newTotalPurchases = totalPurchases + 1;
 
 	// calculate the estimated days until item should be purchased again
 	const daysUntilNextPurchase = calculateEstimate(
 		lastEstimatedInterval,
 		daysSinceLastTransaction,
-		newTotalPurcahses,
+		newTotalPurchases,
 	);
 
 	// get reference to the item's document in Firestore
@@ -146,7 +146,7 @@ export async function updateItem(
 	// set dateLastPurchased to current date, incrememt totalPurchases
 	await updateDoc(itemDocRef, {
 		dateLastPurchased: today,
-		totalPurchases: newTotalPurcahses,
+		totalPurchases: newTotalPurchases,
 		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 	});
 }
