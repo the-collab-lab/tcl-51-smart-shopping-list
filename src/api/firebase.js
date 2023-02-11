@@ -7,7 +7,8 @@ import {
 	updateDoc,
 } from 'firebase/firestore';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * Return whether a collection has documents in it (list token exists) or is empty (list token does not exist)
@@ -104,18 +105,49 @@ export async function addItem(
 	}
 }
 
-export async function updateItem(listToken, itemId, totalPurchases) {
+/**
+ * @param {String} listToken the list token that corresponds to a Firebase collection
+ * @param {Object} itemData the object containing all of the current data for this item from our app's state (destructured in implementation)
+ */
+export async function updateItem(
+	listToken,
+	{ id, dateLastPurchased, dateNextPurchased, dateCreated, totalPurchases },
+) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
+
+	// get current date, the last estimated interval, days since last transaction, and increment total purchases
+	const today = new Date();
+	const lastEstimatedInterval =
+		dateLastPurchased === null
+			? getDaysBetweenDates(dateNextPurchased.toDate(), dateCreated.toDate())
+			: getDaysBetweenDates(
+					dateNextPurchased.toDate(),
+					dateLastPurchased.toDate(),
+			  );
+	const daysSinceLastTransaction =
+		dateLastPurchased === null
+			? getDaysBetweenDates(today, dateCreated.toDate())
+			: getDaysBetweenDates(today, dateLastPurchased.toDate());
+	const newTotalPurchases = totalPurchases + 1;
+
+	// calculate the estimated days until item should be purchased again
+	const daysUntilNextPurchase = calculateEstimate(
+		lastEstimatedInterval,
+		daysSinceLastTransaction,
+		newTotalPurchases,
+	);
+
 	// get reference to the item's document in Firestore
-	const itemDocRef = doc(db, listToken, itemId);
+	const itemDocRef = doc(db, listToken, id);
 	// set dateLastPurchased to current date, incrememt totalPurchases
 	await updateDoc(itemDocRef, {
-		dateLastPurchased: new Date(),
-		totalPurchases: totalPurchases + 1,
+		dateLastPurchased: today,
+		totalPurchases: newTotalPurchases,
+		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 	});
 }
 

@@ -3,10 +3,10 @@ import { withinTwentyFourHours } from '../utils';
 import './ListItem.css';
 
 export function ListItem({ itemData, listToken }) {
-	const onChangeHandler = (event) => {
-		// send listToken (collection), id (document), and value (totalPurchases) to database api
+	const onChangeHandler = () => {
+		// send listToken (collection) and all current item data to database api
 		if (!withinTwentyFourHours(itemData.dateLastPurchased)) {
-			updateItem(listToken, event.target.id, Number(event.target.value));
+			updateItem(listToken, itemData);
 		}
 	};
 
@@ -15,7 +15,6 @@ export function ListItem({ itemData, listToken }) {
 			<input
 				type="checkbox"
 				id={itemData.id}
-				value={itemData.totalPurchases}
 				onChange={onChangeHandler}
 				checked={withinTwentyFourHours(itemData.dateLastPurchased)}
 			/>
