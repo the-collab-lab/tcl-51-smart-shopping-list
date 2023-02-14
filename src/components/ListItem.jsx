@@ -1,4 +1,4 @@
-import { updateItem } from '../api';
+import { updateItem, deleteItem } from '../api';
 import { withinTwentyFourHours } from '../utils';
 import './ListItem.css';
 
@@ -11,7 +11,7 @@ export function ListItem({ itemData, listToken }) {
 	};
 	const clickHandler = () => {
 		if (window.confirm(`Do you want to delete ${itemData.name}?`)) {
-			console.log('Successfully deleted!');
+			deleteItem(listToken, itemData.id);
 		}
 	};
 
