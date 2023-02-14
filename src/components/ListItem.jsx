@@ -9,6 +9,11 @@ export function ListItem({ itemData, listToken }) {
 			updateItem(listToken, itemData);
 		}
 	};
+	const clickHandler = () => {
+		if (window.confirm(`Do you want to delete ${itemData.name}?`)) {
+			console.log('Successfully deleted!');
+		}
+	};
 
 	return (
 		<li className="ListItem">
@@ -19,6 +24,7 @@ export function ListItem({ itemData, listToken }) {
 				checked={withinTwentyFourHours(itemData.dateLastPurchased)}
 			/>
 			<label htmlFor={itemData.id}>{itemData.name}</label>
+			<button onClick={clickHandler}>Delete</button>
 		</li>
 	);
 }
