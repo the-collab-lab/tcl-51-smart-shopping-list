@@ -71,6 +71,54 @@ export function getItemData(snapshot) {
 }
 
 /**
+ * @param {array} itemArray the array of items to be sorted
+ * @returns {array} a reference to the array now sorted
+ * Will have all inactive items last, then sorted by days until next purchase, and items with same days sorted alphabetically
+ */
+export function comparePurchaseUrgency(itemArray) {
+	// split array to active and inactive, sort both, join back together and return
+	let today = new Date();
+
+	let activeArray = itemArray.filter(
+		(item) =>
+			item.dateLastPurchased === null ||
+			getDaysBetweenDates(today, item.dateLastPurchased.toDate()) < 60,
+	);
+	console.log(activeArray);
+	let inactiveArray = itemArray.filter(
+		(item) =>
+			item.dateLastPurchased !== null &&
+			getDaysBetweenDates(today, item.dateLastPurchased.toDate()) >= 60,
+	);
+	console.log(inactiveArray);
+
+	activeArray = sortByDaysUntilNextPurchase(activeArray);
+	inactiveArray = sortByDaysUntilNextPurchase(inactiveArray);
+
+	return activeArray.concat(inactiveArray);
+}
+
+/**
+ * @param {array} itemArray the array of items to be sorted
+ * @returns {array} a reference to the array now sorted
+ * Will be sorted with all by days until the item is expected to be purchased, with same number of days sorted alphabetically
+ */
+function sortByDaysUntilNextPurchase(itemArray) {
+	let today = new Date();
+
+	itemArray.sort((a, b) => {
+		let aDays = getDaysBetweenDates(a.dateNextPurchased.toDate(), today);
+		let bDays = getDaysBetweenDates(b.dateNextPurchased.toDate(), today);
+
+		if (aDays < bDays) return -1;
+		if (aDays > bDays) return 1;
+		return a.name.localeCompare(b.name);
+	});
+
+	return itemArray;
+}
+
+/**
  * Add a new item to the user's list in Firestore.
  * @param {string} listId The id of the list we're adding to.
  * @param {Object} itemData Information about the new item.

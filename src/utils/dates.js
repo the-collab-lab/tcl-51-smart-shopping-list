@@ -28,13 +28,15 @@ export function withinTwentyFourHours(dateLastPurchased) {
  * @param {Date} newerPurchase a JavaScript Date
  * @param {Date} olderPurchase a JavaScript Date
  * @returns {number} the whole number of days between the two input dates
+ * NOTE: will be positive if dateOne is later than dateTwo, otherwise will be negative
  */
-export function getDaysBetweenDates(newerPurchase, olderPurchase) {
-	const newerPurchaseMilliseconds = newerPurchase.getTime();
-	const olderPurchaseMilliseconds = olderPurchase.getTime();
+export function getDaysBetweenDates(dateOne, dateTwo) {
+	const dateOneMilliseconds = dateOne.getTime();
+	const dateTwoMilliseconds = dateTwo.getTime();
 
-	const timeBetween = newerPurchaseMilliseconds - olderPurchaseMilliseconds;
-	const daysBetween = Math.floor(timeBetween / ONE_DAY_IN_MILLISECONDS);
+	const timeBetween = dateOneMilliseconds - dateTwoMilliseconds;
+	const daysBetween = timeBetween / ONE_DAY_IN_MILLISECONDS;
 
-	return daysBetween;
+	// positive and negative numbers should both drop their decimals (only whole number answers)
+	return daysBetween >= 0 ? Math.floor(daysBetween) : Math.ceil(daysBetween);
 }
