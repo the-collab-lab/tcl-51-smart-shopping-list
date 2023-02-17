@@ -1,4 +1,4 @@
-import { updateItem } from '../api';
+import { updateItem, deleteItem } from '../api';
 import { withinTwentyFourHours } from '../utils';
 import './ListItem.css';
 
@@ -7,6 +7,11 @@ export function ListItem({ itemData, listToken }) {
 		// send listToken (collection) and all current item data to database api
 		if (!withinTwentyFourHours(itemData.dateLastPurchased)) {
 			updateItem(listToken, itemData);
+		}
+	};
+	const clickHandler = () => {
+		if (window.confirm(`Do you want to delete ${itemData.name}?`)) {
+			deleteItem(listToken, itemData.id);
 		}
 	};
 
@@ -19,6 +24,7 @@ export function ListItem({ itemData, listToken }) {
 				checked={withinTwentyFourHours(itemData.dateLastPurchased)}
 			/>
 			<label htmlFor={itemData.id}>{itemData.name}</label>
+			<button onClick={clickHandler}>Delete</button>
 		</li>
 	);
 }
