@@ -84,13 +84,11 @@ export function comparePurchaseUrgency(itemArray) {
 			item.dateLastPurchased === null ||
 			getDaysBetweenDates(today, item.dateLastPurchased.toDate()) < 60,
 	);
-	console.log(activeArray);
 	let inactiveArray = itemArray.filter(
 		(item) =>
 			item.dateLastPurchased !== null &&
 			getDaysBetweenDates(today, item.dateLastPurchased.toDate()) >= 60,
 	);
-	console.log(inactiveArray);
 
 	activeArray = sortByDaysUntilNextPurchase(activeArray);
 	inactiveArray = sortByDaysUntilNextPurchase(inactiveArray);
