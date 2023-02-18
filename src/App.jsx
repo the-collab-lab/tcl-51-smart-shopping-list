@@ -47,7 +47,7 @@ export function App() {
 			 */
 			const nextData = getItemData(snapshot);
 
-			// sort the data received from Firebase by
+			// sort the data received from Firebase by our default sort
 			const nextDataSorted = comparePurchaseUrgency(nextData);
 
 			/** Finally, we update our React state. */
