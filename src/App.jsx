@@ -8,7 +8,7 @@ import {
 
 import { AddItem, Home, Layout, List } from './views';
 
-import { getItemData, streamListItems } from './api';
+import { getItemData, streamListItems, comparePurchaseUrgency } from './api';
 import { useStateWithStorage } from './utils';
 
 export function App() {
@@ -47,8 +47,11 @@ export function App() {
 			 */
 			const nextData = getItemData(snapshot);
 
+			// sort the data received from Firebase by our default sort
+			const nextDataSorted = comparePurchaseUrgency(nextData);
+
 			/** Finally, we update our React state. */
-			setData(nextData);
+			setData(nextDataSorted);
 		});
 	}, [listToken]);
 
