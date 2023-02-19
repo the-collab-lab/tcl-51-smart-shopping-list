@@ -1,4 +1,4 @@
-import { updateItem } from '../api';
+import { updateItem, deleteItem } from '../api';
 import { withinTwentyFourHours, getDaysBetweenDates } from '../utils';
 import './ListItem.css';
 
@@ -30,6 +30,11 @@ export function ListItem({ itemData, listToken }) {
 			updateItem(listToken, itemData);
 		}
 	};
+	const clickHandler = () => {
+		if (window.confirm(`Do you want to delete ${itemData.name}?`)) {
+			deleteItem(listToken, itemData.id);
+		}
+	};
 
 	return (
 		<li className="ListItem">
@@ -41,6 +46,7 @@ export function ListItem({ itemData, listToken }) {
 			/>
 			<label htmlFor={itemData.id}>{itemData.name}</label>
 			<span className={`item-status ${statusClass}`}>{statusString}</span>
+			<button onClick={clickHandler}>Delete</button>
 		</li>
 	);
 }
