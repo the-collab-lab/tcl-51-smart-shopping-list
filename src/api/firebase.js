@@ -6,6 +6,9 @@ import {
 	deleteDoc,
 	getCountFromServer,
 	updateDoc,
+	query,
+	where,
+	getDocs,
 } from 'firebase/firestore';
 import { db } from './config';
 import { getFutureDate, getDaysBetweenDates } from '../utils';
@@ -206,4 +209,24 @@ export async function deleteItem(listToken, id) {
 	 */
 
 	await deleteDoc(doc(db, listToken, id));
+}
+
+/**
+ * @param {String} listToken the list token that corresponds to a Firebase collection
+ * Finds the hidden item in the database and updates it's date next purchsed to 1 day in the future to trigger a data refresh
+ */
+export async function refreshData(listToken) {
+	const q = query(collection(db, listToken), where('hidden', '==', true));
+	const querySnapshot = await getDocs(q);
+
+	let hiddenId;
+	querySnapshot.forEach((doc) => {
+		hiddenId = doc.id;
+	});
+
+	const hiddenDocRef = doc(db, listToken, hiddenId);
+
+	await updateDoc(hiddenDocRef, {
+		dateNextPurchased: getFutureDate(1),
+	});
 }
