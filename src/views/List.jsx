@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ListItem } from '../components';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { refreshData } from '../api';
 
 export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
@@ -13,6 +15,18 @@ export function List({ data, listToken }) {
 	const submitHandler = (event) => {
 		event.preventDefault();
 	};
+
+	const ONE_DAY_IN_MILLISECONDS = 86400000;
+
+	// force refresh of list to re-sort/clear checkboxes once a day
+	useEffect(() => {
+		const refreshTimeout = setTimeout(() => {
+			refreshData(listToken);
+		}, ONE_DAY_IN_MILLISECONDS);
+		return () => {
+			clearTimeout(refreshTimeout);
+		};
+	}, [listToken, data]);
 
 	return (
 		<>
