@@ -1,7 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
+
+@layer components {
+	html,
+	body,
+	#root,
+	.Layout {
+		@apply min-h-screen;
+	}
+
+	#root {
+		@apply w-full flex justify-center lg:text-lg bg-cream text-darkgray dark:bg-darkgray  dark:text-offwhite;
+	}
+
+	/*Layout Styling  */
+	.Layout {
+		@apply mx-auto w-5/6 md:w-2/3 lg:w-1/2 flex flex-col justify-between;
+	}
+
+	.Layout-header {
+		@apply sticky top-0 py-2 text-center text-2xl font-bold bg-cream dark:bg-darkgray;
+	}
+
+	.Nav {
+		@apply sticky bottom-0 mt-4 flex justify-around items-stretch bg-offwhite dark:bg-lightgray;
+	}
+
+	.Nav-link {
+		@apply flex-1 py-0.5 text-center;
+	}
+
+	.Nav-link.active {
+		@apply bg-lightgray text-offwhite dark:bg-medgray;
+	}
+}
+
+/* :root {
 	--color-black: hsla(220, 13%, 18%, 1);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
 	--color-white: hsla(220, 13%, 98%, 1);
@@ -39,12 +74,12 @@
 *::after,
 *::before {
 	box-sizing: border-box;
-}
+} */
 
 /**
  * Make sure the app fills the height of the viewport
  */
-html,
+/* html,
 body,
 #root,
 #root > * {
@@ -94,4 +129,4 @@ code {
 
 ul {
 	padding: 0;
-}
+} */

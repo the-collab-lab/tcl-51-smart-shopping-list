@@ -1,6 +1,7 @@
 import { updateItem, deleteItem } from '../api';
 import { withinTwentyFourHours, getDaysBetweenDates } from '../utils';
 import './ListItem.css';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 export function ListItem({ itemData, listToken }) {
 	// determine item's status based on dateNextPuchased and dateLastPurchased
@@ -46,7 +47,9 @@ export function ListItem({ itemData, listToken }) {
 			/>
 			<label htmlFor={itemData.id}>{itemData.name}</label>
 			<span className={`item-status ${statusClass}`}>{statusString}</span>
-			<button onClick={clickHandler}>Delete</button>
+			<button onClick={clickHandler}>
+				<TrashIcon className="h-8 w-8 border-2 border-red-600 dark:border-blue-500" />
+			</button>
 		</li>
 	);
 }
