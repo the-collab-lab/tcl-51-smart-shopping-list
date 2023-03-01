@@ -1,4 +1,4 @@
-.ListItem {
+/* .ListItem {
 	align-items: baseline;
 	display: flex;
 	flex-direction: row;
@@ -14,7 +14,7 @@
 }
 
 /* item status styling */
-.item-status {
+/* .item-status {
 	padding-left: 5px;
 }
 
@@ -36,4 +36,4 @@
 
 .item-long {
 	color: #5bc0de;
-}
+} */
