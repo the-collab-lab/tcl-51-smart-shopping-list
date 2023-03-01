@@ -8,6 +8,8 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
 
+	const hiddenButtonClassName = listFilter === '' ? 'invisible' : 'visible';
+
 	const clickHandler = (event) => {
 		event.preventDefault();
 		setListFilter('');
@@ -30,16 +32,24 @@ export function List({ data, listToken }) {
 	}, [listToken, data]);
 
 	return (
-		<>
+		<div className="ListView pt-5 flex flex-col items-center">
 			{listToken && (
-				<>
+				<div className="flex flex-col items-start mb-3">
 					<p>Want to share your list?</p>
-					<p>Your list token is: {listToken}</p>
-				</>
+					<p>
+						Your list token is:
+						<span className="ml-1 font-semibold">{listToken}</span>
+					</p>
+				</div>
 			)}
 			{data.length > 0 ? (
-				<form onSubmit={submitHandler}>
-					<label htmlFor="itemInput">Filter Items: </label>
+				<form
+					onSubmit={submitHandler}
+					className="mb-3 w-full md:max-w-sm flex flex-wrap"
+				>
+					<label htmlFor="itemInput" className="min-w-full">
+						Filter Items:{' '}
+					</label>
 					<input
 						type="text"
 						id="itemInput"
@@ -47,18 +57,23 @@ export function List({ data, listToken }) {
 						placeholder="Start typing here..."
 						value={listFilter}
 						onChange={(event) => setListFilter(event.target.value)}
+						className="p-1 flex-1 text-darkgray dark:bg-offwhite border border-lightgray rounded"
 					/>
-					{listFilter && (
-						<span>
-							<button type="reset" onClick={clickHandler}>
-								<XMarkIcon className="h-8 w-8 border-2 border-red-600" />
-							</button>
-						</span>
-					)}
+					<span
+						className={`w-8 h-8 ml-1 md:w-9 md:h-9 md:ml-2 ${hiddenButtonClassName}`}
+					>
+						<button type="reset" onClick={clickHandler}>
+							<XMarkIcon
+								title="clear field"
+								alt="clear-field"
+								className="w-8 h-8 md:w-9 md:h-9 bg-lightgray text-offwhite rounded-md border border-lightgray hover:bg-medgray"
+							/>
+						</button>
+					</span>
 				</form>
 			) : null}
 			{data.length > 0 ? (
-				<ul>
+				<ul className="w-full md:max-w-sm mt-2">
 					{data
 						.filter((item) =>
 							item.name.toLowerCase().includes(listFilter.toLowerCase()),
@@ -77,6 +92,6 @@ export function List({ data, listToken }) {
 					</Link>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
