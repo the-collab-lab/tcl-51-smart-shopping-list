@@ -38,17 +38,25 @@ export function ListItem({ itemData, listToken }) {
 	};
 
 	return (
-		<li className="ListItem">
+		<li
+			className={`ListItem ${statusClass} mb-2 p-1 flex items-center justify-between`}
+		>
 			<input
 				type="checkbox"
 				id={itemData.id}
 				onChange={onChangeHandler}
 				checked={withinTwentyFourHours(itemData.dateLastPurchased)}
+				className="w-3.5 h-3.5 ml-0.5 accent-lightgray"
 			/>
-			<label htmlFor={itemData.id}>{itemData.name}</label>
-			<span className={`item-status ${statusClass}`}>{statusString}</span>
-			<button onClick={clickHandler}>
-				<TrashIcon className="h-8 w-8 border-2 border-red-600 dark:border-blue-500" />
+			<label
+				htmlFor={itemData.id}
+				className="flex-1 mx-2"
+			>{`${itemData.name} ${statusString}`}</label>
+			<button
+				onClick={clickHandler}
+				className="p-1 border rounded border-lightgray/10 hover:border-lightgray/30"
+			>
+				<TrashIcon className="h-5 w-5" />
 			</button>
 		</li>
 	);
