@@ -40,6 +40,7 @@
 	}
 
 	/* ListItem Component Styling */
+  
 	.item-inactive {
 		@apply border-2 border-statusgray/70 rounded-md bg-statusgray/30;
 	}
@@ -49,15 +50,37 @@
 	}
 
 	.item-short {
-		@apply border-2 border-statusorange/70 rounded-md bg-statusorange/30;
+		@apply border-2 border-statusorange/70 rounded-md bg-statusorange/30 text-darkgray dark:text-offwhite;
 	}
 
-	.item-mid {
-		@apply border-2 border-statusgreen/70 rounded-md bg-statusgreen/30;
+  .item-mid {
+		@apply border-2 border-statusgreen/70 rounded-md bg-statusgreen/30 text-darkgray dark:text-offwhite;
 	}
 
-	.item-long {
-		@apply border-2 border-statusblue/70 rounded-md bg-statusblue/30;
+  .item-long {
+		@apply border-2 border-statusblue/70 rounded-md bg-statusblue/30 text-darkgray dark:text-offwhite;
+	}
+  
+	/* Add Item Form Styling */
+  
+	.ItemLabel {
+		@apply pb-3 pt-5 pr-4 block;
+	}
+
+	.AddItemInput {
+		@apply text-darkgray p-1 rounded border border-lightgray w-full;
+	}
+
+	.RadioItem {
+		@apply flex items-center mb-2 pl-3 p-1;
+	}
+
+	.RadioInput {
+		@apply w-4 h-4 accent-lightgray;
+	}
+
+	.FormButton {
+		@apply bg-lightgray text-offwhite py-2 px-4  hover:bg-medgray border border-lightgray rounded mt-2 mb-2;
 	}
 }
 
