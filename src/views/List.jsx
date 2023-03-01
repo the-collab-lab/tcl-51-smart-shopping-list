@@ -3,6 +3,7 @@ import { ListItem } from '../components';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { refreshData } from '../api';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 export function List({ data, listToken }) {
 	const [listFilter, setListFilter] = useState('');
@@ -30,9 +31,11 @@ export function List({ data, listToken }) {
 
 	return (
 		<>
-			<h2>Smart Shopping List</h2>
 			{listToken && (
-				<p>Want to share your list? Your list token is: {listToken}</p>
+				<>
+					<p>Want to share your list?</p>
+					<p>Your list token is: {listToken}</p>
+				</>
 			)}
 			{data.length > 0 ? (
 				<form onSubmit={submitHandler}>
@@ -48,7 +51,7 @@ export function List({ data, listToken }) {
 					{listFilter && (
 						<span>
 							<button type="reset" onClick={clickHandler}>
-								X
+								<XMarkIcon className="h-8 w-8 border-2 border-red-600" />
 							</button>
 						</span>
 					)}
