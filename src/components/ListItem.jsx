@@ -1,6 +1,5 @@
 import { updateItem, deleteItem } from '../api';
 import { withinTwentyFourHours, getDaysBetweenDates } from '../utils';
-import './ListItem.css';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 export function ListItem({ itemData, listToken }) {
@@ -31,6 +30,7 @@ export function ListItem({ itemData, listToken }) {
 			updateItem(listToken, itemData);
 		}
 	};
+
 	const clickHandler = () => {
 		if (window.confirm(`Do you want to delete ${itemData.name}?`)) {
 			deleteItem(listToken, itemData.id);

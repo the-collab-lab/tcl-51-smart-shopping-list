@@ -1,4 +1,3 @@
-import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { addItem, doesCollectionExist } from '../api';
 import { useState } from 'react';
@@ -6,8 +5,8 @@ import { useState } from 'react';
 export function Home({ setListToken }) {
 	const [tokenInput, setTokenInput] = useState('');
 
-	// upon button click generate new token and send it to parent component to store in state
-	// also send a hidden placeholder item to firestore to create the collection for this list token (will be filtered out so just setting next purchase to default value of 7)
+	// generate new token and send it to parent component to store in state
+	// send hidden placeholder item to firestore to create collection for list token (will be filtered out so using default daysUntilNextPurchase value of 7)
 	const clickHandler = () => {
 		let newToken = generateToken();
 		setListToken(newToken);
