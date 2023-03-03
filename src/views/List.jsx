@@ -85,10 +85,10 @@ export function List({ data, listToken }) {
 						})}
 				</ul>
 			) : (
-				<div>
-					<p>There are currently no items in the list.</p>
+				<div className="flex flex-col items-center mt-10">
+					<p className=" mb-10">There are currently no items in the list.</p>
 					<Link to={'/add-item'}>
-						<button>Add item</button>
+						<button className="ButtonGeneral">Add item</button>
 					</Link>
 				</div>
 			)}

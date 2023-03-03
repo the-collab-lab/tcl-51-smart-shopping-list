@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-	/* App Common Styling  */
+	/* App Common Styling */
 	html,
 	body,
 	#root,
@@ -24,6 +24,7 @@
 	}
 
 	/* Layout Styling  */
+
 	.Layout {
 		@apply w-5/6 mx-auto max-w-sm flex flex-col justify-between;
 	}
