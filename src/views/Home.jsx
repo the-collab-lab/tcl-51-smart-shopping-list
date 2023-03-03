@@ -33,30 +33,37 @@ export function Home({ setListToken }) {
 	};
 
 	return (
-		<div className="Home">
-			<div>
+		<div className="pt-5">
+			<div className="flex flex-col items-center">
 				<p>Welcome to your new shopping list!</p>
-				<button onClick={clickHandler}>Create a new list</button>
+				<button className="ButtonGeneral mt-5" onClick={clickHandler}>
+					Create a new list
+				</button>
 			</div>
 
-			<div>
+			<div className="flex flex-col items-center py-5">
 				<p>- or -</p>
 			</div>
 
-			<div>
-				<p>Join an existing shoping list by entering a three word token</p>
-				<form onSubmit={handleTokenSubmit}>
-					<label htmlFor="shareToken">Share Token</label>
+			<div className="flex flex-col items-center">
+				<form
+					onSubmit={handleTokenSubmit}
+					className="flex flex-col items-center text-center"
+				>
+					<label htmlFor="shareToken">
+						Enter three word token to join an existing list:
+					</label>
 					<input
 						required
 						aria-required="true"
 						type="text"
 						id="shareToken"
+						className="InputGeneral mt-3"
 						placeholder="Enter Token"
 						value={tokenInput}
 						onChange={tokenHandler}
 					/>
-					<button>Join an existing list</button>
+					<button className="ButtonGeneral mt-5">Join existing list</button>
 				</form>
 			</div>
 		</div>
