@@ -15,7 +15,7 @@ module.exports = {
 				darkgray: '#1F1F27',
 				medgray: '#403F50',
 				lightgray: '#746B7B',
-				cream: '#E8E1D0',
+				cream: '#F3F2EF',
 				offwhite: '#F1E8E8',
 				statusred: '#D9534F',
 				statusorange: '#F0AD4E',
