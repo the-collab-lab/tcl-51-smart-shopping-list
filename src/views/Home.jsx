@@ -35,7 +35,11 @@ export function Home({ setListToken }) {
 		<div className="pt-5">
 			<div className="flex flex-col items-center">
 				<p>Welcome to your new shopping list!</p>
-				<button className="ButtonGeneral mt-5" onClick={clickHandler}>
+				<button
+					className="ButtonGeneral mt-5"
+					onClick={clickHandler}
+					type="button"
+				>
 					Create a new list
 				</button>
 			</div>
@@ -62,7 +66,9 @@ export function Home({ setListToken }) {
 						value={tokenInput}
 						onChange={tokenHandler}
 					/>
-					<button className="ButtonGeneral mt-5">Join existing list</button>
+					<button className="ButtonGeneral mt-5" type="submit">
+						Join existing list
+					</button>
 				</form>
 			</div>
 		</div>

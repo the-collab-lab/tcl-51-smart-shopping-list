@@ -55,8 +55,9 @@ export function ListItem({ itemData, listToken }) {
 			<button
 				onClick={clickHandler}
 				className="p-1 border rounded border-lightgray/10 hover:border-lightgray/30"
+				type="button"
 			>
-				<TrashIcon className="h-5 w-5" />
+				<TrashIcon title="delete item" alt="delete-item" className="h-5 w-5" />
 			</button>
 		</li>
 	);
