@@ -39,28 +39,18 @@ export function streamListItems(listId, handleSuccess) {
 }
 
 /**
- * Read the information from the provided snapshot and return an array
- * that can be stored in our React state.
+ * Read the information from the provided snapshot and return an array that can be stored in our React state.
  * @param {Object} snapshot A special Firebase document with information about the current state of the database.
  * @returns {Object[]} An array of objects representing the user's list.
  */
 export function getItemData(snapshot) {
-	/**
-	 * Firebase document snapshots contain a `.docs` property that is an array of
-	 * document references. We use `.map()` to iterate over them.
-	 * @see https://firebase.google.com/docs/reference/js/firestore_.documentsnapshot
-	 */
+	// Firebase document snapshots contain a `.docs` property that is an array of document references.
+	// We use `.map()` to iterate over them. @see https://firebase.google.com/docs/reference/js/firestore_.documentsnapshot
 	const arrayFromFirestore = snapshot.docs.map((docRef) => {
-		/**
-		 * We call the `.data()` method to get the data
-		 * out of the referenced document
-		 */
+		// call the `.data()` method to get the data out of the referenced document
 		const data = docRef.data();
 
-		/**
-		 * The document's ID is not part of the data, but it's very useful
-		 * so we get it from the document reference.
-		 */
+		// The document's ID is not part of the data, but it's very useful so we get it from the document reference.
 		data.id = docRef.id;
 
 		return data;
@@ -136,13 +126,10 @@ export async function addItem(
 	// if hidden property exists (placeholder item) set isHidden to true, otherwise false (all other items)
 	const isHidden = hidden !== undefined ? true : false;
 
-	// TODO: Replace this call to console.log with the appropriate
-	// Firebase function, so this information is sent to your database!
 	try {
 		await setDoc(doc(listCollectionRef), {
 			dateCreated: new Date(),
 			// NOTE: This is null because the item has just been created.
-			// We'll use updateItem to put a Date here when the item is purchased!
 			dateLastPurchased: null,
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name: itemName,
@@ -163,12 +150,6 @@ export async function updateItem(
 	listToken,
 	{ id, dateLastPurchased, dateNextPurchased, dateCreated, totalPurchases },
 ) {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to update an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
-
 	// get current date, the last estimated interval, days since last transaction, and increment total purchases
 	const today = new Date();
 	const lastEstimatedInterval =
@@ -193,6 +174,7 @@ export async function updateItem(
 
 	// get reference to the item's document in Firestore
 	const itemDocRef = doc(db, listToken, id);
+
 	// set dateLastPurchased to current date, incrememt totalPurchases
 	await updateDoc(itemDocRef, {
 		dateLastPurchased: today,
@@ -201,13 +183,11 @@ export async function updateItem(
 	});
 }
 
+/**
+ * @param {String} listToken the list token that corresponds to a Firebase collection
+ * @param {String} id the document id for the item to be deleted
+ */
 export async function deleteItem(listToken, id) {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to delete an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
-
 	await deleteDoc(doc(db, listToken, id));
 }
 

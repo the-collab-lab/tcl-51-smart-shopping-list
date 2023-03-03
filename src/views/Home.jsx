@@ -1,4 +1,3 @@
-import './Home.css';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { addItem, doesCollectionExist } from '../api';
 import { useState } from 'react';
@@ -6,8 +5,8 @@ import { useState } from 'react';
 export function Home({ setListToken }) {
 	const [tokenInput, setTokenInput] = useState('');
 
-	// upon button click generate new token and send it to parent component to store in state
-	// also send a hidden placeholder item to firestore to create the collection for this list token (will be filtered out so just setting next purchase to default value of 7)
+	// generate new token and send it to parent component to store in state
+	// send hidden placeholder item to firestore to create collection for list token (will be filtered out so using default daysUntilNextPurchase value of 7)
 	const clickHandler = () => {
 		let newToken = generateToken();
 		setListToken(newToken);
@@ -36,7 +35,11 @@ export function Home({ setListToken }) {
 		<div className="pt-5">
 			<div className="flex flex-col items-center">
 				<p>Welcome to your new shopping list!</p>
-				<button className="ButtonGeneral mt-5" onClick={clickHandler}>
+				<button
+					className="ButtonGeneral mt-5"
+					onClick={clickHandler}
+					type="button"
+				>
 					Create a new list
 				</button>
 			</div>
@@ -63,7 +66,9 @@ export function Home({ setListToken }) {
 						value={tokenInput}
 						onChange={tokenHandler}
 					/>
-					<button className="ButtonGeneral mt-5">Join existing list</button>
+					<button className="ButtonGeneral mt-5" type="submit">
+						Join existing list
+					</button>
 				</form>
 			</div>
 		</div>
