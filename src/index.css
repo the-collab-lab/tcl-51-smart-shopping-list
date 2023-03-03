@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+	/* App Common Styling  */
 	html,
 	body,
 	#root,
@@ -12,6 +13,14 @@
 
 	#root {
 		@apply w-full flex justify-center lg:text-lg bg-cream text-darkgray dark:bg-darkgray  dark:text-offwhite;
+	}
+
+	.ButtonGeneral {
+		@apply bg-lightgray text-offwhite py-2 px-4  hover:bg-medgray border border-lightgray rounded mt-2 mb-2;
+	}
+
+	.InputGeneral {
+		@apply text-darkgray p-1 rounded border border-lightgray w-full;
 	}
 
 	/* Layout Styling  */
@@ -40,7 +49,7 @@
 	}
 
 	/* ListItem Component Styling */
-  
+
 	.item-inactive {
 		@apply border-2 border-statusgray/70 rounded-md bg-statusgray/30;
 	}
@@ -53,22 +62,18 @@
 		@apply border-2 border-statusorange/70 rounded-md bg-statusorange/30 text-darkgray dark:text-offwhite;
 	}
 
-  .item-mid {
+	.item-mid {
 		@apply border-2 border-statusgreen/70 rounded-md bg-statusgreen/30 text-darkgray dark:text-offwhite;
 	}
 
-  .item-long {
+	.item-long {
 		@apply border-2 border-statusblue/70 rounded-md bg-statusblue/30 text-darkgray dark:text-offwhite;
 	}
-  
+
 	/* Add Item Form Styling */
-  
+
 	.ItemLabel {
 		@apply pb-3 pt-5 pr-4 block;
-	}
-
-	.AddItemInput {
-		@apply text-darkgray p-1 rounded border border-lightgray w-full;
 	}
 
 	.RadioItem {
@@ -77,10 +82,6 @@
 
 	.RadioInput {
 		@apply w-4 h-4 accent-lightgray;
-	}
-
-	.FormButton {
-		@apply bg-lightgray text-offwhite py-2 px-4  hover:bg-medgray border border-lightgray rounded mt-2 mb-2;
 	}
 }
 

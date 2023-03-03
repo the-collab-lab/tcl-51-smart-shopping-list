@@ -9,7 +9,7 @@ export default function Form({ handleSubmit, form, onChange }) {
 					type="text"
 					id="itemName"
 					name="itemName"
-					className="AddItemInput"
+					className="InputGeneral"
 					placeholder="Enter Item"
 					value={form.itemName}
 					onChange={onChange}
@@ -62,7 +62,7 @@ export default function Form({ handleSubmit, form, onChange }) {
 						</label>
 					</div>
 				</fieldset>
-				<button className="FormButton" type="submit">
+				<button className="ButtonGeneral" type="submit">
 					Add Item
 				</button>
 			</form>
