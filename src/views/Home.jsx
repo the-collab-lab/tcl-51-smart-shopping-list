@@ -1,6 +1,7 @@
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { addItem, doesCollectionExist } from '../api';
 import { useState } from 'react';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 export function Home({ setListToken }) {
 	const [tokenInput, setTokenInput] = useState('');
@@ -37,7 +38,7 @@ export function Home({ setListToken }) {
 				<p>Welcome to your new shopping list!</p>
 				<button
 					className="ButtonGeneral mt-5"
-					onClick={clickHandler}
+					onClick={() => console.log('Creating new lists is disabled')}
 					type="button"
 				>
 					Create a new list
@@ -71,6 +72,7 @@ export function Home({ setListToken }) {
 					</button>
 				</form>
 			</div>
+			<ArchivalNoticeModal />
 		</div>
 	);
 }
